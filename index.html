@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto en Movimiento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #111;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .fixed-text {
+            font-size: 3em;
+            margin-top: 10%;
+        }
+        .moving-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2em;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            color: #0f0;
+            animation: move 10s linear infinite;
+        }
+        @keyframes move {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .image-container {
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 300px;
+            height: auto;
+            border: 5px solid #f00;
+            border-radius: 10px;
+        }
+        .weird-text {
+            font-size: 1.5em;
+            color: #f00;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-text">
+        ¡Te Hemos Hackeado!
+    </div>
+    <div id="moving-text" class="moving-text">
+        <!-- El texto se insertará aquí -->
+    </div>
+    <div class="image-container">
+        <img src="hacker.png" alt="Imagen de Hacker">
+    </div>
+    <div id="weird-text" class="weird-text">
+        <!-- Texto raro se insertará aquí -->
+    </div>
+
+    <script>
+        // Lista de palabras aleatorias
+        const randomWords = [
+            'hsadbd', 'jascjasbd', 'oashdjkha', '8234ghydjaq',
+            'zxcvbnm', 'qwerty', 'asdfghjkl', '123456', 
+            'random', 'text', 'example', 'message'
+        ];
+
+        // Función para generar una cadena de texto aleatorio
+        function generateRandomText() {
+            let text = '';
+            for (let i = 0; i < 10; i++) {
+                text += randomWords[Math.floor(Math.random() * randomWords.length)] + ' ';
+            }
+            return text.trim();
+        }
+
+        // Cambiar el texto aleatoriamente cada 3 segundos
+        function updateText() {
+            const textElement = document.getElementById('moving-text');
+            textElement.textContent = generateRandomText();
+        }
+
+        // Cambiar el texto raro cada 5 segundos
+        function updateWeirdText() {
+            const weirdTextElement = document.getElementById('weird-text');
+            let weirdText = '';
+            for (let i = 0; i < 5; i++) {
+                weirdText += generateRandomText() + '\n';
+            }
+            weirdTextElement.textContent = weirdText;
+        }
+
+        // Inicializar los textos y empezar los intervalos
+        updateText();
+        setInterval(updateText, 3000);
+        setInterval(updateWeirdText, 5000);
+    </script>
+</body>
+</html>
+
